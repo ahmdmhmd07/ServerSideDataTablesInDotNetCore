@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script src="~/lib/datatables.net/jquery.datatables.min.js"></script>
+<link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+<div class="container">
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>TotalTimeWorked</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable(
+                {
+
+                    ajax: {
+                        url: "Home/GetEmployeeList",
+                        type: "POST", 
+                    },
+                    processing: true,
+                    serverSide: true,
+                    filter: true,
+                    columns: [
+                        { data: "employeeId", name: "EmployeeId" },
+                        { data: "employeeName", name: "EmployeeName" },
+                        { data: "employeeTotalTimeWorked", name: "EmployeeTotalTimeWorked" },
+,
+                    ]
+                }
+            );
+
+
+            //$('#myTable').each(function (i, row) {
+            //    var $actualRow = $(row);
+            //    if ($colorRow.find('input.EmployeeTotalTimeWorked').val() == '10') {
+            //        $colorRow.css('background-color', '#0094ff');
+            //    }
+
+            //});
+
+        });
+    </script>
+}
